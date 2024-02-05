@@ -14,5 +14,16 @@ import { ref } from 'vue'
 setup() {
     let name = ref('张三')
     let age = ref(48)
+    let obj = ref({
+        type: '前端工程师',
+        salary: '30k'
+    })
+}
+
+function changeInfo() {
+    name.value = '李四'
+    age.value = 55
+    job.value.type = 'UI设计师'
+    job.value.salary = '50k'
 }
 ```

@@ -1,44 +1,54 @@
 <template>
   <h1>一个人的信息</h1>
-  <h2>姓名：{{ name }}</h2>
-  <h2>年龄：{{ age }}</h2>
-  <h3>工作种类：{{ job.type }}</h3>
-  <h3>工作薪水：{{ job.salary }}</h3>
+  <h2>姓名：{{ person.name }}</h2>
+  <h2>年龄：{{ person.age }}</h2>
+  <h3>工作种类：{{ person.job.type }}</h3>
+  <h3>工作薪水：{{ person.job.salary }}</h3>
+  <h3>爱好：{{ person.hobby }}</h3>
+  <h3>测试的数据c：{{ person.job.a.b.c }}</h3>
   <button @click="changeInfo">修改人的信息</button>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive } from "vue";
 export default {
-  name: 'App',
+  name: "App",
   setup() {
     // 数据
-    let name = ref('张三')
-    let age = ref(18)
-    let job = ref({
-      type: '前端工程师',
-      salary: '30k'
+    let person = reactive({
+      name: "张三",
+      age: 18,
+      job: {
+        type: "前端工程师",
+        salary: "30k",
+        a: {
+          b: {
+            c: 666,
+          },
+        },
+      },
+      hobby: ["抽烟", "喝酒", "烫头"]
     })
 
-    function changeInfo () {
-      name.value = '李四',
-      age.value = 48
-      job.value.type = 'UI设计师'
-      job.value.salary = '60k'
-      console.log(name, age);
+    // 不要给reactive 传入基本数据类型
+    // let number = reactive(666)
+
+    function changeInfo() {
+      person.name = "李四";
+      person.age = 48;
+      person.job.type = "UI设计师";
+      person.job.salary = "60k";
+      person.job.a.b.c = 999;
+      person.hobby[0] = "学习"
     }
 
     return {
-      name,
-      age,
-      changeInfo,
-      job
-    }
-
-  }
-}
+      person,
+      changeInfo
+    };
+  },
+};
 </script>
 
 <style>
-
 </style>
