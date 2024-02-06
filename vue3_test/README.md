@@ -33,3 +33,7 @@ function changeInfo() {
 ### 1.4 vue3响应式原理
   - 通过Proxy（代理）:  拦截对象中任意属性的变化, 包括：属性值的读写、属性的添加、属性的删除等。
   - 通过Reflect（反射）:  对源对象的属性进行操作。
+
+  ### 1.5 setup 的两个注意点
+  - setup 执行时机
+    - 在 beforeCreate 之前执行一次，this是 undefined
