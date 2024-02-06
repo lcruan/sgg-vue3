@@ -27,3 +27,5 @@ function changeInfo() {
     job.value.salary = '50k'
 }
 ```
+
+### 1.3 reactive函数
