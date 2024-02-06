@@ -41,15 +41,15 @@
         const p = new Proxy(person, {
             get (target, propName) {
                 console.log(`有人读取了 p 的${propName}属性`);
-                return target[propName]
+                return Reflect.get(target, propName)
             },
             set (target, propName, value) {
                 console.log(`有人修改了 p 的${propName}属性，我要去更新界面了！`)
-                target[propName] = value
+                Reflect.set(target, propName, value)
             },
             defineProperty (target, propName) {
                 console.log(`有人删除了 p 的${propName}属性，我要去更新界面了！`)
-                return delete target[propName]
+                return Reflect.deleteProperty(target, propName)
             }
         })
     </script>
