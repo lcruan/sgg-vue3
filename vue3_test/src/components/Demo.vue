@@ -23,7 +23,7 @@ export default {
     // 数据
     let sum = ref(0);
     let msg = ref("你好啊");
-    let person = reactive({
+    let person = ref({
       name: "张三",
       age: 18,
       job: {
@@ -33,57 +33,14 @@ export default {
       },
     });
 
-    // 组合式api就是一堆内置的函数
+    watch(sum, (newValue, oldValue) => {
+      console.log('sum的值变化了', oldValue, newValue);
+    })
 
-    // 情况一：监视ref所定义的一个响应式数据
-    /*   watch(
-      sum,
-      (newValue, oldValue) => {
-        console.log("sum的值变化了", newValue, oldValue);
-      },
-      {
-        immediate: true,
-      }
-    ); */
-
-    // 情况二：监视ref所定义的多个响应式数据
-    /* watch(
-      [sum, msg],
-      (newValue, oldValue) => {
-        console.log("sum或msg的值变化了", newValue, oldValue);
-      },
-      {
-        immediate: true,
-      }
-    ); */
-
-    // 情况三：监视reative所定义的一个响应式数据的全部属性，注意：此处无法正确的获取oldValue
-    /**
-     * 注意：1. 此处无法正确获取oldVlaue
-     * 注意：2. 强制开启了深度监视（deep配置无效）
-     */
-    /*  watch(person, (newValue, oldValue) => {
-      console.log('person变化了', newValue, oldValue);
-    }, {
-      deep: false // 此处的deep无效
-    }) */
-
-    // 情况四：监视reactive所定义的一个响应式数据中的某一个属性
-    // 监视对象的某一个属性不能用person.age这种形式来写，用函数形式
-    /*    watch(() => person.age, (newValue, oldValue) => {
-      console.log('person的age变化了');
-    }) */
-
-    // 情况五：监视reactive所定义的一个响应式数据中的某些属性
-   /*  watch([()=> person.name, ()=> person.age], (newValue, oldValue) => {
-      console.log('person的name或age变化了', newValue, oldValue);
-    }) */
-
-    // 特殊情况
-    watch(()=>person.job, (newValue, oldValue) => {
-      console.log('person的job属性变化了', newValue, oldValue);
+    watch(person, (newValue, oldValue) => {
+      console.log('person的值变化了', oldValue, newValue);
     },{
-      deep: true // 此处由于监视的是reactive所定义的对象中的某个属性，所以deep配置有效
+      deep: true
     })
 
     return {
