@@ -37,3 +37,6 @@ function changeInfo() {
   ### 1.5 setup 的两个注意点
   - setup 执行时机
     - 在 beforeCreate 之前执行一次，this是 undefined
+  - setup 的参数
+    - props
+    - context 包含了 插槽，emit
